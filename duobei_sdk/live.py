@@ -191,3 +191,22 @@ class LiveAPI(APIMixin):
         }
         response = self.request(url, params, method='get', response_format_type='content')
         return response
+
+    def room_detail(self, roomid):
+        '''
+        查看教室房间详情
+        URL
+        https://api.duobeiyun.com/api/v3/room/detail
+        参数名  必填(Y/N)   说明
+        partner Y   合作 id
+        sign    Y   加密校验值
+        roomId  Y   房间的 Id
+        timestamp   Y   从 1970 到现在的时间差的毫秒数, 该时间戳的有效期是 5 分钟
+        '''
+        url = self.get_url('v3/room/detail')
+        timestamp = self.get_now_timestamp()
+        params = {
+            'partner': self.partner_id, 'roomId': roomid, 'timestamp': timestamp,
+        }
+        response = self.request(url, params, method='post')
+        return response

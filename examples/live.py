@@ -59,6 +59,12 @@ def room_update_time_v4(roomid):
     return response
 
 
+def room_detail(roomid):
+    live_api = LiveAPI(PARTNER_ID, APIKEY)
+    response = live_api.room_detail(roomid)
+    return response
+
+
 def room_enter(roomid, role, device_type=constants.DeviceType.pc.value):
     mapper = {
         'teacher': {
