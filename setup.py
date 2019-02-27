@@ -3,12 +3,12 @@
 from os.path import join, dirname
 from setuptools import setup
 
-PACKAGE_NAME = ''
-PACKAGE_PATH = ''
+PACKAGE_NAME = 'duobei_sdk'
+PACKAGE_PATH = 'duobei_sdk'
 
 version = __import__(PACKAGE_PATH).__version__
 
-SHORT_DESCRIPTION = ''''''
+SHORT_DESCRIPTION = '''SDK for duobei.'''
 
 LONG_DESCRIPTION = ''''''
 
@@ -27,9 +27,9 @@ setup(name=PACKAGE_NAME,
       author_email='duoduo3369@gmail.com',
       description= SHORT_DESCRIPTION,
       license='MIT',
-      keywords='',
-      url='',
-      download_url='',
+      keywords='duobei,duobei sdk',
+      url='https://github.com/duoduo369/duobei_sdk',
+      download_url='https://github.com/duoduo369/duobei_sdk/archive/newest.zip',
       packages=[''],
       long_description=long_description(),
       install_requires=[],
