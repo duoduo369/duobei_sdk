@@ -14,7 +14,7 @@ class LiveAPI(APIMixin):
     def get_api_prefix(self):
         return 'https://api.duobeiyun.com/api/'
 
-    def room_create(self, title, starttime, duration, timestamp, video=0, room_type=2):
+    def room_create(self, title, starttime, duration, video=0, room_type=2):
         '''
         创建房间
         URL

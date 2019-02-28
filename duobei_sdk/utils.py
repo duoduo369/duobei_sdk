@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import
+import arrow
 
 import hashlib
 
@@ -21,3 +22,7 @@ class Sign(object):
     def sign(self, params):
         encode_string = self.encode(params)
         return hashlib.md5(encode_string).hexdigest()
+
+
+def tzone_to_shanghai(_datetime):
+    return arrow.get(_datetime).to('Asia/Shanghai')

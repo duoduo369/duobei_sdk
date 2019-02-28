@@ -47,6 +47,3 @@ class APIMixin(object):
     def get_now_timestamp(self):
         timestamp = int(time.time() * 1000)
         return timestamp
-
-    def tzone_to_shanghai(self, _datetime):
-        return arrow.get(_datetime).to('Asia/Shanghai')

@@ -5,6 +5,7 @@ import time
 from __secret import PARTNER_ID, APIKEY
 
 from duobei_sdk import constants
+from duobei_sdk import utils
 from duobei_sdk.live import LiveAPI
 
 
@@ -12,7 +13,7 @@ def room_create():
     live_api = LiveAPI(PARTNER_ID, APIKEY)
 
     title = 'sdk 测试创建room v3'
-    starttime = arrow.now().shift(minutes=1)
+    starttime = utils.tzone_to_shanghai(arrow.now().shift(minutes=1))
     duration = 1
     video=0
     room_type=2
@@ -25,7 +26,7 @@ def room_create():
 def room_create_v4():
     live_api = LiveAPI(PARTNER_ID, APIKEY)
     title = 'sdk 测试创建room v4'
-    starttime = arrow.now().shift(minutes=10)
+    starttime = utils.tzone_to_shanghai(arrow.now().shift(minutes=1))
     length = 35
     video=0
     room_type=2
@@ -51,7 +52,7 @@ def room_update_time(roomid):
 
 def room_update_time_v4(roomid):
     live_api = LiveAPI(PARTNER_ID, APIKEY)
-    starttime = arrow.now().shift(minutes=5)
+    starttime = utils.tzone_to_shanghai(arrow.now().shift(minutes=5))
     length = 50
     response = live_api.room_update_time_v4(roomid, starttime, length)
     return response
