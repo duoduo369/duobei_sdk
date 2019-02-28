@@ -4,6 +4,7 @@
 http://docs.duobeiyun.com/
 2019/02/27
 '''
+import arrow
 from . import constants
 from .mixins import APIMixin
 
@@ -32,7 +33,8 @@ class LiveAPI(APIMixin):
         url = self.get_url('v3/room/create')
         if duration not in (1, 2, 3, 4, 5):
             raise exceptions.DuobeiSDKInvalidParamException('duration not valid')
-        starttime = self.tzone_to_shanghai(starttime).format('YYYY-MM-DD HH:mm')
+        # 东八区注意
+        starttime = arrow.get(starttime).format('YYYY-MM-DD HH:mm')
         room_type = constants.RoomType(room_type).value
         timestamp = self.get_now_timestamp()
         params = {
@@ -62,7 +64,8 @@ class LiveAPI(APIMixin):
         length = int(length)
         if length < 30 or length > 300:
             raise exceptions.DuobeiSDKInvalidParamException('length not valid')
-        starttime = self.tzone_to_shanghai(starttime).format('YYYY-MM-DD HH:mm')
+        # 东八区注意
+        starttime = arrow.get(starttime).format('YYYY-MM-DD HH:mm')
         timestamp = self.get_now_timestamp()
         room_type = constants.RoomType(room_type).value
         params = {
@@ -110,7 +113,8 @@ class LiveAPI(APIMixin):
         '''
         url = self.get_url('v3/room/update/time')
         timestamp = self.get_now_timestamp()
-        starttime = self.tzone_to_shanghai(starttime).format('YYYY-MM-DD HH:mm')
+        # 东八区注意
+        starttime = arrow.get(starttime).format('YYYY-MM-DD HH:mm')
         params = {
             'partner': self.partner_id, 'roomId': roomid, 'timestamp': timestamp,
             'startTime': starttime, 'duration': duration,
@@ -138,7 +142,8 @@ class LiveAPI(APIMixin):
         if length < 30 or length > 300:
             raise exceptions.DuobeiSDKInvalidParamException('length not valid')
         timestamp = self.get_now_timestamp()
-        starttime = self.tzone_to_shanghai(starttime).format('YYYY-MM-DD HH:mm')
+        # 东八区注意
+        starttime = arrow.get(starttime).format('YYYY-MM-DD HH:mm')
         params = {
             'partner': self.partner_id, 'roomId': roomid, 'timestamp': timestamp,
             'startTime': starttime, 'length': length,
