@@ -14,11 +14,10 @@ def room_create():
     title = 'sdk 测试创建room v3'
     starttime = arrow.now().shift(minutes=1)
     duration = 1
-    timestamp = int(time.time() * 1000)
     video=0
     room_type=2
     response = live_api.room_create(
-        title, starttime, duration, timestamp, video=video, room_type=room_type
+        title, starttime, duration, video=video, room_type=room_type
     )
     return response
 
@@ -28,11 +27,10 @@ def room_create_v4():
     title = 'sdk 测试创建room v4'
     starttime = arrow.now().shift(minutes=10)
     length = 35
-    timestamp = int(time.time() * 1000)
     video=0
     room_type=2
     response = live_api.room_create_v4(
-        title, starttime, length, timestamp, video=video, room_type=room_type
+        title, starttime, length, video=video, room_type=room_type
     )
     return response
 

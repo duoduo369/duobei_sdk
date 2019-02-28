@@ -42,7 +42,7 @@ class LiveAPI(APIMixin):
         response = self.request(url, params, method='post')
         return response
 
-    def room_create_v4(self, title, starttime, length, timestamp, video=0, room_type=2):
+    def room_create_v4(self, title, starttime, length, video=0, room_type=2):
         '''
         创建房间(方式2)
         URL
