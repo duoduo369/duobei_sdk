@@ -13,6 +13,8 @@ class Sign(object):
     def encode(self, params):
         data = []
         for key, val in params.iteritems():
+            if val is None:
+                continue
             if val == '':
                 continue
             data.append('{}={}'.format(key, val))

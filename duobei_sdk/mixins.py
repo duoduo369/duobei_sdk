@@ -23,9 +23,20 @@ class APIMixin(object):
         api_prefix = self.get_api_prefix()
         return '{}{}'.format(api_prefix, path)
 
+    def process_params(self, params):
+        _params = {}
+        for key, val in params.iteritems():
+            if val is None:
+                continue
+            if val == '':
+                continue
+            _params[key] = val
+        return _params
+
     def request(self, url, params, method='get', timeout=3, response_format_type='json'):
         if not isinstance(params, dict):
             raise exceptions.DuobeiSDKInvalidParamException()
+        params = self.process_params(params)
         sign = self.sign.sign(params)
         _params = copy.deepcopy(params)
         _params['sign'] = sign
