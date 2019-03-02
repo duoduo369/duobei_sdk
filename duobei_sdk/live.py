@@ -197,6 +197,22 @@ class LiveAPI(APIMixin):
         response = self.request(url, params, method='get', response_format_type='content')
         return response
 
+    def room_enter_url(self, roomid, uid, nickname, user_role, device_type,
+            h5='false', ps_time='', pe_time='', tape='', admin_disable_chat='false'):
+        '''同room enter, 当自己网站没有 https 时需要直接用多贝的接口'''
+        url = self.get_url('v3/room/enter')
+        timestamp = self.get_now_timestamp()
+        user_role = constants.UserRole(user_role).value
+        device_type = constants.DeviceType(device_type).value
+        params = {
+            'partner': self.partner_id, 'roomId': roomid, 'timestamp': timestamp,
+            'uid': uid, 'nickname': nickname, 'userRole': user_role,
+            'DeviceType': device_type, 'h5': h5, 'psTime': ps_time, 'peTime': pe_time,
+            'tape': tape, 'adminDisableChat': admin_disable_chat
+        }
+        url = self.get_request_url(url, params)
+        return url
+
     def room_detail(self, roomid):
         '''
         查看教室房间详情

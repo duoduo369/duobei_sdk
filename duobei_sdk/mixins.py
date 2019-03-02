@@ -5,7 +5,7 @@ import logging
 import time
 import requests
 
-from . import exceptions
+from . import exceptions, utils
 from .utils import Sign
 
 
@@ -31,15 +31,21 @@ class APIMixin(object):
             if val == '':
                 continue
             _params[key] = val
+        sign = self.sign.sign(_params)
+        _params['sign'] = sign
         return _params
+
+    def get_request_url(self, url, params=None):
+        params = params or {}
+        if not isinstance(params, dict):
+            raise exceptions.DuobeiSDKInvalidParamException()
+        _params = self.process_params(params)
+        return utils.format_url(url, _params)
 
     def request(self, url, params, method='get', timeout=3, response_format_type='json'):
         if not isinstance(params, dict):
             raise exceptions.DuobeiSDKInvalidParamException()
-        params = self.process_params(params)
-        sign = self.sign.sign(params)
-        _params = copy.deepcopy(params)
-        _params['sign'] = sign
+        _params = self.process_params(params)
         if method == 'get':
             response = requests.get(url, params=_params, timeout=timeout)
         elif method == 'post':

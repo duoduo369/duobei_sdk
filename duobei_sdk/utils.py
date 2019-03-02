@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import
-import arrow
 
+import arrow
 import hashlib
+
+from requests.models import PreparedRequest
 
 
 class Sign(object):
@@ -28,3 +30,9 @@ class Sign(object):
 
 def tzone_to_shanghai(_datetime):
     return arrow.get(_datetime).to('Asia/Shanghai')
+
+
+def format_url(url, params):
+    _request = PreparedRequest()
+    _request.prepare_url(url, params=params)
+    return _request.url

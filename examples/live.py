@@ -94,3 +94,35 @@ def room_enter(roomid, role, device_type=constants.DeviceType.pc.value):
     live_api = LiveAPI(PARTNER_ID, APIKEY)
     response = live_api.room_enter(roomid, uid, nickname, user_role, device_type)
     return response
+
+
+def room_enter_url(roomid, role, device_type=constants.DeviceType.pc.value):
+    mapper = {
+        'teacher': {
+            'uid': 'aaaa1',
+            'nickname': 'teacher',
+            'user_role': constants.UserRole.teacher.value,
+        },
+        'audience': {
+            'uid': 'aaaa2',
+            'nickname': 'audience',
+            'user_role': constants.UserRole.audience.value,
+        },
+        'invisible_user': {
+            'uid': 'aaaa3',
+            'nickname': 'invisible_user',
+            'user_role': constants.UserRole.invisible_user.value,
+        },
+        'assistant': {
+            'uid': 'aaaa4',
+            'nickname': 'assistant',
+            'user_role': constants.UserRole.assistant.value,
+        },
+    }
+    data = mapper[role]
+    uid = data['uid']
+    nickname = data['nickname']
+    user_role = data['user_role']
+    live_api = LiveAPI(PARTNER_ID, APIKEY)
+    url = live_api.room_enter_url(roomid, uid, nickname, user_role, device_type)
+    return url
